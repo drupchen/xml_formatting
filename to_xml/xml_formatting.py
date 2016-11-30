@@ -66,5 +66,10 @@ for f in os.listdir('{}/{}'.format(in_path, in_folder)):
         metadata[f]['SRC_PATH'] = 'To Change. {}/{}'.format(in_folder, f)
         formatted_header = format_header(metadata[f])
         tei = '<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">{}{}</tei:TEI>'.format(formatted_header, formatted_text)
-        write_file()
-    print('ok')
+        out_folder = 'output/{}'.format(metadata[f]['TBRC_text_RID'].split('-')[0])
+        if not os.path.exists(out_folder):
+            os.makedirs(out_folder)
+        work_folder = '{}/{}'.format(out_folder, metadata[f]['TBRC_text_RID'].replace('-0000', ''))
+        if not os.path.exists(work_folder):
+            os.makedirs(work_folder)
+        write_file('{}/{}.xml'.format(work_folder, metadata[f]['TBRC_text_RID']), tei)
