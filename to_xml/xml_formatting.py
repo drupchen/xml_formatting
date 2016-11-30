@@ -65,21 +65,24 @@ def write_in_folder_structure(metadata, tei):
     write_file('{}/{}.xml'.format(work_folder, metadata[f]['TBRC_text_RID']), tei)
 
 
+def main(in_path, in_folder):
+    metadata = yaml.load(open_file('{}/{}/metadata/meta.txt'.format(in_path, in_folder)))
+    for f in os.listdir('{}/{}'.format(in_path, in_folder)):
+        if f.endswith('.txt'):
+            work_name = f.replace('.txt', '')
+            # open the OCR'd file and parse its content
+            content = open_file('{}/{}/{}'.format(in_path, in_folder, f)).replace('OCR text', '')
+            parsed = parse_content(content)
+            # format the body of the text
+            formatted_text = format_text(parsed)
+            # format the xml header
+            metadata[f]['SRC_PATH'] = 'To Change. {}/{}'.format(in_folder, f)
+            formatted_header = format_header(metadata[f])
+            # put the whole xml together
+            tei = '<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">{}{}</tei:TEI>'.format(formatted_header, formatted_text)
+            # create the folder structure and write the xml files
+            write_in_folder_structure(metadata, tei)
+
 in_path = './raw_data'
 in_folder = 'W24829-OCR'
-metadata = yaml.load(open_file('{}/{}/metadata/meta.txt'.format(in_path, in_folder)))
-for f in os.listdir('{}/{}'.format(in_path, in_folder)):
-    if f.endswith('.txt'):
-        work_name = f.replace('.txt', '')
-        # open the OCR'd file and parse its content
-        content = open_file('{}/{}/{}'.format(in_path, in_folder, f)).replace('OCR text', '')
-        parsed = parse_content(content)
-        # format the body of the text
-        formatted_text = format_text(parsed)
-        # format the xml header
-        metadata[f]['SRC_PATH'] = 'To Change. {}/{}'.format(in_folder, f)
-        formatted_header = format_header(metadata[f])
-        # put the whole xml together
-        tei = '<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">{}{}</tei:TEI>'.format(formatted_header, formatted_text)
-        # create the folder structure and write the xml files
-        write_in_folder_structure(metadata, tei)
+main(in_path, in_folder)
