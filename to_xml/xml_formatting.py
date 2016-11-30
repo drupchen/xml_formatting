@@ -1,5 +1,6 @@
 import os
 import re
+import yaml
 
 def write_file(file_path, content):
     with open(file_path, 'w', -1, 'utf8') as f:
@@ -14,18 +15,18 @@ def open_file(file_path):
         with open(file_path, 'r', -1, 'utf-16-le') as f:
             return f.read()
 
-in_path = './raw_data'
-in_folder = 'W24829-OCR'
-for f in os.listdir('{}/{}'.format(in_path, in_folder)):
-    work_name = f.replace('.txt', '')
-    content = open_file('{}/{}/{}'.format(in_path, in_folder, f)).replace('OCR text', '')
+
+def parse_content(content):
     pages = re.split(r'\n*([0-9]+\.tif)\n', content.strip())
     if pages[0] == '':
         del pages[0]
     parsed = []
-    for page_num in range(0, len(pages)-1, 2):
-        parsed.append((pages[page_num], pages[page_num+1].split('\n')))
+    for page_num in range(0, len(pages) - 1, 2):
+        parsed.append((pages[page_num], pages[page_num + 1].split('\n')))
+    return parsed
 
+
+def format_text(parsed):
     formatted_pages = []
     for p in parsed:
         tif = p[0]
@@ -39,10 +40,31 @@ for f in os.listdir('{}/{}'.format(in_path, in_folder)):
                 formatted_pages.append(page)
             else:
                 line_format = '<tei:milestone unit="line" n="{}"/>{}'
-                formatted_lines = [line_format.format(num+1, line) for num, line in enumerate(lines)]
+                formatted_lines = [line_format.format(num + 1, line) for num, line in enumerate(lines)]
                 page = '<tei:p unit="page" n="{}">{}</tei:p>'.format(tif, ''.join(formatted_lines))
                 formatted_pages.append(page)
+    return '<tei:text><tei:body><tei:div>{}</tei:div></tei:body></tei:text>'.format(''.join(formatted_pages))
 
-    formatted_text = '<tei:text><tei:body><tei:div>{}</tei:div></tei:body></tei:text>'.format(''.join(formatted_pages))
 
+def format_header(metadata):
+    text_title = metadata['text_title'] # pod 5 bod ljongs nag chu sa khul gyi lo rgyus rig gnas
+    distributor_comment = metadata['distributor_comment']  # This OCR'd text was generated using UCB's Namsel-OCR application on Jul 23, 2014 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+    TBRC_text_RID = metadata['TBRC_text_RID']  # UT00EGS1016733-I01JW48-0000
+    TBRC_RID = metadata['TBRC_RID']  # W00EGS1016733
+    SRC_PATH = metadata['SRC_PATH'] # Namsel_OCR/Batch-20140903/W00EGS1016733/xml/W00EGS1016733-I01JW48/W00EGS1016733-I01JW48.xml
+    return '<tei:teiHeader><tei:fileDesc><tei:titleStmt><tei:title>{}</tei:title></tei:titleStmt><tei:publicationStmt><tei:distributor>\n{}\n</tei:distributor><tei:idno type="TBRC_TEXT_RID">{}</tei:idno><tei:idno type="page_equals_image">page_equals_image</tei:idno></tei:publicationStmt><tei:sourceDesc><tei:bibl><tei:idno type="TBRC_RID">{}</tei:idno><tei:idno type="SRC_PATH">{}</tei:idno></tei:bibl></tei:sourceDesc></tei:fileDesc></tei:teiHeader>'.format(text_title, distributor_comment, TBRC_text_RID, TBRC_RID, SRC_PATH)
+
+in_path = './raw_data'
+in_folder = 'W24829-OCR'
+metadata = yaml.load(open_file('{}/{}/metadata/meta.txt'.format(in_path, in_folder)))
+for f in os.listdir('{}/{}'.format(in_path, in_folder)):
+    if f.endswith('.txt'):
+        work_name = f.replace('.txt', '')
+        content = open_file('{}/{}/{}'.format(in_path, in_folder, f)).replace('OCR text', '')
+        parsed = parse_content(content)
+        formatted_text = format_text(parsed)
+        metadata[f]['SRC_PATH'] = 'To Change. {}/{}'.format(in_folder, f)
+        formatted_header = format_header(metadata[f])
+        tei = '<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">{}{}</tei:TEI>'.format(formatted_header, formatted_text)
+        write_file()
     print('ok')

@@ -1,0 +1,48 @@
+4897.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 1 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4898.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 2 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4899.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 3 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4900.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 4 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4901.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 5 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4902.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 6 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4903.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 7 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
+4904.txt:
+  SRC_PATH: ''
+  TBRC_RID: W24829
+  TBRC_text_RID: UT24829-4897-4904
+  distributor_comment: This OCR'd text was generated using UCB's Namsel-OCR application on Nov 30, 2016 at the request of the Tibetan Buddhist Resource Center. Please note this document has not been finalized and is subject to additional changes and corrections.
+  text_title: 8 dpal sprul o rgyan 'jigs med chos kyi dbang po'i gsung 'bum
