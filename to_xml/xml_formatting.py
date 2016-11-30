@@ -69,7 +69,6 @@ def main(in_path, in_folder):
     metadata = yaml.load(open_file('{}/{}/metadata/meta.txt'.format(in_path, in_folder)))
     for f in os.listdir('{}/{}'.format(in_path, in_folder)):
         if f.endswith('.txt'):
-            work_name = f.replace('.txt', '')
             # open the OCR'd file and parse its content
             content = open_file('{}/{}/{}'.format(in_path, in_folder, f)).replace('OCR text', '')
             parsed = parse_content(content)
